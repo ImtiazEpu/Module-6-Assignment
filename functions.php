@@ -38,10 +38,10 @@ function abort ( int $http_status_code = 404 ): void {
  *
  * @return void
  */
-function json($status, $data) {
+function json ( $status, $data ) {
     $cors = "*";
-    header("Access-Control-Allow-Origin: $cors");
-    header('Content-Type: application/json; charset=utf-8');
-    http_response_code($status);
-    echo json_encode($data);
+    header( "Access-Control-Allow-Origin: $cors" );
+    header( 'Content-Type: application/json; charset=utf-8' );
+    http_response_code( $status );
+    echo json_encode( $data );
 }

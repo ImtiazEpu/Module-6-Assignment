@@ -1,14 +1,14 @@
 <?php
 // Get the email address of the user to delete from the POST data
-$email = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_EMAIL );
+$email    = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_EMAIL );
 $filename = filter_input( INPUT_POST, 'filename', FILTER_SANITIZE_SPECIAL_CHARS );
-if (isset($email) && isset($filename)) {
+if ( isset( $email ) && isset( $filename ) ) {
 
     /**
      * Delete the file from the uploads folder
      */
-    if (file_exists($filename)) {
-        unlink($filename);
+    if ( file_exists( $filename ) ) {
+        unlink( $filename );
     }
 
     /**
@@ -46,8 +46,8 @@ if (isset($email) && isset($filename)) {
     /**
      * Send response
      */
-    json(200, [
-        "status" => 200,
+    json( 200, [
+        "status"  => 200,
         "message" => "Record successfully deleted",
-    ]);
+    ] );
 }
