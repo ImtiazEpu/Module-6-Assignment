@@ -22,6 +22,28 @@ if ( isset( $name ) && isset( $email ) && isset( $password ) && 'POST' === $_SER
     }
 
     /**
+     * Password length validation
+     */
+    if (strlen($password) < 8) {
+        echo 'Password must be at least 8 characters long';
+        exit;
+    }
+
+    /**
+     * Generate a random salt value
+     */
+    try {
+        $salt = password_hash( random_bytes( 16 ), PASSWORD_BCRYPT );
+    } catch ( Exception $e ) {
+        throw new Exception( 'Generate a random salt value error  ' . $e->getMessage() . '' );
+    }
+
+    /**
+     * Combine the password and salt, and hash them using bcrypt
+     */
+    $hash_password = password_hash($password . $salt, PASSWORD_BCRYPT);
+
+    /**
      * save profile picture with a unique filename
      */
     if ( isset( $_FILES[ 'profile-picture' ] ) && $_FILES[ 'profile-picture' ][ 'error' ] === UPLOAD_ERR_OK ) {
